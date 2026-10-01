@@ -24,7 +24,9 @@ Original spec: kept locally, not committed. Work plan: `docs/PLAN.md`.
 - Code, comments, commit messages and docs are written in English.
 
 ## Commands
-- Start the environment: `docker compose up -d`
+- Start the environment: `docker compose up -d --build`
+- Install dependencies: `docker compose exec -u www-data app composer install`
+- Site: http://localhost:8080, MySQL from the host: `localhost:3307` (blog/blog)
 - Apply schema and seed: `docker compose exec app php database/seed.php`
 - Syntax check: `find src public -name '*.php' -exec php -l {} \;`
 

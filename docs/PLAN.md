@@ -2,7 +2,7 @@
 
 Each item is a separate commit. Owner: `(me)` — written by hand, `(AI)` — delegated to an AI assistant.
 
-- [ ] 1. (AI) Environment: `docker-compose.yml` (php 8.3 + apache, mysql 8), `composer.json` with Smarty and PSR-4 autoload, `public/index.php` prints "Hello".
+- [x] 1. (AI) Environment: `docker-compose.yml` (php 8.3 + apache, mysql 8), `composer.json` with Smarty and PSR-4 autoload, `public/index.php` prints "Hello".
 - [ ] 2. (me) Database schema: `database/schema.sql` — `categories`, `posts` (image, title, description, body, views, published_at), many-to-many `post_category`. Indexes to support sorting.
 - [ ] 3. (AI) Seeder: `database/seed.php` — recreates the schema, generates ~5 categories and ~40 posts with placeholder images.
 - [ ] 4. (me) Core: `Db` (PDO singleton configured from env), `View` (Smarty wrapper), simple `Router` (`/`, `/category/{id}`, `/post/{id}`, 404).

@@ -1,0 +1,19 @@
+# Composer dependencies
+/vendor/
+
+# Local environment settings
+.env
+
+# Smarty compiled templates and cache
+/var/
+
+# Sass cache
+.sass-cache/
+
+# IDE and OS files
+.idea/
+.vscode/
+.DS_Store
+
+# Local Claude Code settings
+.claude/settings.local.json

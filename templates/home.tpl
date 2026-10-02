@@ -7,13 +7,7 @@
             <h2>{$category.name}</h2>
             {if $category.description}<p>{$category.description}</p>{/if}
             {foreach $postsByCategory[$category.id] as $post}
-                <article>
-                    <img src="{$post.image}" alt="{$post.title}">
-                    <h3><a href="/post/{$post.id}">{$post.title}</a></h3>
-                    <p>{$post.description}</p>
-                    <time
-                    datetime="{$post.published_at|date_format:"%Y-%m-%d"}">{$post.published_at|date_format:"%d.%m.%Y"}</time>
-                </article>
+                {include file="post_card.tpl" post=$post}
             {/foreach}
             <p><a href="/category/{$category.id}">All posts</a></p>
         </section>

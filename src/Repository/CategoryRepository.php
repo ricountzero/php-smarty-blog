@@ -38,4 +38,19 @@ final class CategoryRepository
 
         return $stmt->fetch() ?: null;
     }
+
+    /** @return list<array{id: int, name: string}> */
+    public function findByPost(int $postId): array
+    {
+        $stmt = $this->pdo->prepare(<<<SQL
+            SELECT c.id, c.name
+            FROM post_category pc
+            JOIN categories c ON c.id = pc.category_id
+            WHERE pc.post_id = :post_id
+            ORDER BY c.name
+            SQL);
+        $stmt->execute(['post_id' => $postId]);
+
+        return $stmt->fetchAll();
+    }
 }

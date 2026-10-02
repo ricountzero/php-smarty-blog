@@ -72,4 +72,45 @@ final class PostRepository
 
         return $stmt->fetchAll();
     }
+
+    /** @return array{id: int, image: string, title: string, description: string, body: string, views: int, published_at: string}|null */
+    public function findById(int $id): ?array
+    {
+        $stmt = $this->pdo->prepare(<<<SQL
+            SELECT p.id, p.image, p.title, p.description, p.body, p.views, p.published_at
+            FROM posts p
+            WHERE p.id = :id
+            SQL);
+        $stmt->execute(['id' => $id]);
+
+        return $stmt->fetch() ?: null;
+    }
+
+    public function incrementViews(int $id): void
+    {
+        $stmt = $this->pdo->prepare(<<<SQL
+            UPDATE posts
+            SET views = views + 1
+            WHERE id = :id
+            SQL);
+        $stmt->execute(['id' => $id]);
+    }
+
+    /** @return list<array<string, mixed>> */
+    public function findRelated(int $postId, int $limit): array
+    {
+        $stmt = $this->pdo->prepare(<<<SQL
+            SELECT p.id, p.image, p.title, p.description, p.views, p.published_at
+            FROM post_category cur
+            JOIN post_category pc ON pc.category_id = cur.category_id AND pc.post_id <> cur.post_id
+            JOIN posts p ON p.id = pc.post_id
+            WHERE cur.post_id = :post_id
+            GROUP BY p.id
+            ORDER BY COUNT(*) DESC, p.published_at DESC, p.id DESC
+            LIMIT :limit
+            SQL);
+        $stmt->execute(['post_id' => $postId, 'limit' => $limit]);
+
+        return $stmt->fetchAll();
+    }
 }

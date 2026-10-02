@@ -9,16 +9,9 @@
             {if $key === $sort}<strong>{$label}</strong>{else}<a href="?sort={$key}">{$label}</a>{/if}
         {/foreach}
     </p>
+    <h2>Posts</h2>
     {foreach $posts as $post}
-        <article>
-            <time
-                datetime="{$post.published_at|date_format:"%Y-%m-%d"}">{$post.published_at|date_format:"%d.%m.%Y"}</time>
-            <br>
-            <img src="{$post.image}" alt="{$post.title}">
-            <h2><a href="/post/{$post.id}">{$post.title}</a></h2>
-            <p>{$post.description}</p>
-            <p><span>{$post.views} views</span></p>
-        </article>
+        {include file="post_card.tpl" post=$post}
     {foreachelse}
         <p>No posts yet.</p>
     {/foreach}

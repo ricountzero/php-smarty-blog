@@ -7,10 +7,12 @@
         <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-        <header>
-            <a href="/">Blog</a>
+        <header class="site-header">
+            <div class="container site-header__inner">
+                <a class="site-header__logo" href="/">Blog</a>
+            </div>
         </header>
-        <main>
+        <main class="container">
             {block name=content}{/block}
         </main>
     </body>

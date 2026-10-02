@@ -1,0 +1,23 @@
+// Colors
+$color-text: #1f2328;
+$color-muted: #656d76;
+$color-background: #f6f8fa;
+$color-surface: #ffffff;
+$color-border: #d0d7de;
+$color-accent: #0b62d6;
+
+// Typography
+$font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+$line-height: 1.6;
+
+// Spacing and shapes
+$space: 1rem;
+$radius: 8px;
+$container-width: 1100px;
+$text-width: 720px;
+
+// Breakpoints for the mobile-first layout (see the `from` mixin)
+$breakpoints: (
+    sm: 600px,
+    md: 900px,
+);

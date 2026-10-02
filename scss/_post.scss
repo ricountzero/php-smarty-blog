@@ -1,0 +1,42 @@
+@use "sass:color";
+@use "variables" as *;
+
+.post {
+    max-width: $text-width;
+    margin: 0 auto $space * 3;
+
+    &__meta {
+        font-size: 0.875rem;
+    }
+
+    &__categories {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $space * 0.5;
+    }
+
+    &__image {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        margin-bottom: $space * 1.5;
+        border-radius: $radius;
+    }
+
+    &__lead {
+        font-size: 1.25rem;
+    }
+
+    &__body p {
+        margin-bottom: $space * 1.25;
+    }
+}
+
+// Category link on the post page
+.tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 999px;
+    background: color.scale($color-accent, $lightness: 88%);
+}

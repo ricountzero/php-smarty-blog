@@ -1,0 +1,45 @@
+@use "sass:color";
+@use "variables" as *;
+@use "mixins" as *;
+
+.button {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    color: #ffffff;
+    background: $color-accent;
+    border-radius: $radius;
+
+    &:hover {
+        text-decoration: none;
+        background: color.scale($color-accent, $lightness: -20%);
+    }
+}
+
+// Current item is rendered as <strong>, the others as links
+.sort,
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $space * 0.5;
+
+    a,
+    strong {
+        @include pill;
+    }
+
+    strong {
+        font-weight: normal;
+        color: #ffffff;
+        background: $color-accent;
+        border-color: $color-accent;
+    }
+}
+
+.sort {
+    margin: 0;
+}
+
+.pagination {
+    justify-content: center;
+}

@@ -1,0 +1,61 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+// One column on phones, two on tablets, three on desktops
+.post-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space * 1.5;
+    margin-bottom: $space * 1.5;
+
+    @include from(sm) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include from(md) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius;
+    transition: box-shadow 0.2s;
+
+    &:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    &__image {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+    }
+
+    // Grows to fill the card so the meta line sticks to the bottom in a row of cards
+    &__body {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        padding: $space;
+    }
+
+    &__title a {
+        color: $color-text;
+    }
+
+    &__description {
+        flex: 1;
+        color: $color-muted;
+    }
+
+    &__meta {
+        margin: 0;
+        font-size: 0.875rem;
+        color: $color-muted;
+    }
+}

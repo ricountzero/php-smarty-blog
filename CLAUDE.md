@@ -29,6 +29,7 @@ Original spec: kept locally, not committed. Work plan: `docs/PLAN.md`.
 - Site: http://localhost:8080, MySQL from the host: `localhost:3307` (blog/blog)
 - Apply schema and seed: `docker compose exec app php database/seed.php`
 - Syntax check: `find src public -name '*.php' -exec php -l {} \;`
+- Build CSS (compiled file is committed): `docker compose exec -u www-data app sass scss/style.scss public/css/style.css --no-source-map` (add `--watch` while editing)
 
 ## Workflow
 - One task from `docs/PLAN.md` at a time; after each task, verify in the browser/curl and commit.

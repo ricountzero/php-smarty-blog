@@ -22,7 +22,10 @@ final class PostController
 
     public function show(int $id): void
     {
-        $this->posts->incrementViews($id);
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $this->posts->incrementViews($id);
+        }
+
         $post = $this->posts->findById($id);
         if ($post === null) {
             throw new NotFoundException("No post with id=$id");

@@ -107,7 +107,9 @@ User input never becomes part of the SQL text. Every sort also has `id` as a sec
 
 After `GROUP BY` on the post, `COUNT(*)` equals the number of shared categories.
 
-**View counter.** The counter is incremented with `UPDATE posts SET views = views + 1`. This is atomic in MySQL, so concurrent requests do not lose views, which a read-modify-write in PHP would. The counter is incremented before the post is loaded, so the page shows the count including the current view.
+**View counter.** The counter is incremented with `UPDATE posts SET views = views + 1`. This is atomic in MySQL, so concurrent requests do not lose views, which a read-modify-write in PHP would. The counter is incremented before the post is loaded, so the page shows the count including the current view. Only `GET` requests are counted: `HEAD` requests (link checkers, monitoring) and `POST` requests do not change the counter.
+
+**One URL per page.** Routes accept ids only without leading zeros (`[1-9]\d*`), so `/post/02` returns 404 instead of duplicating `/post/2`.
 
 **Escaping.** Smarty's `escape_html` is enabled globally: every variable in a template is HTML-escaped. The post body is split into paragraphs with the `split` modifier, and each paragraph is escaped on output. `nl2br` with `nofilter` is not used, because it would turn off escaping.
 
@@ -115,7 +117,7 @@ After `GROUP BY` on the post, `COUNT(*)` equals the number of shared categories.
 
 ## Known limitations
 
-- Every page load counts as a view, including reloads and bots. Counting unique visitors (by session or IP) would be a separate feature.
+- Every `GET` page load counts as a view, including reloads and bots. Counting unique visitors (by session or IP) would be a separate feature.
 - `OFFSET` pagination gets slower on very deep pages of large tables. For a blog of this size it is not an issue.
 - Related posts are calculated on every request, without caching.
 - Images are external placeholders from picsum.photos, so the demo needs internet access to show them.

@@ -29,8 +29,8 @@ try {
     $postController = new PostController($view, $categoryRepository, $postRepository);
 
     $router->add('#^/$#', [$homeController, 'index']);
-    $router->add('#^/category/(\d+)$#', [$categoryController, 'show']);
-    $router->add('#^/post/(\d+)$#', [$postController, 'show']);
+    $router->add('#^/category/([1-9]\d*)$#', [$categoryController, 'show']);
+    $router->add('#^/post/([1-9]\d*)$#', [$postController, 'show']);
 
     $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?: '/';
     $router->dispatch($path);

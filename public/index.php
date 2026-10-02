@@ -7,6 +7,7 @@ use App\Core\Router;
 use App\Core\NotFoundException;
 use App\Core\Db;
 use App\Controller\HomeController;
+use App\Controller\CategoryController;
 use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
 
@@ -17,10 +18,14 @@ $router = new Router();
 
 $pdo = Db::connection();
 
-$homeController = new HomeController($view, new CategoryRepository($pdo), new PostRepository($pdo));
+$categoryRepository = new CategoryRepository($pdo);
+$postRepository = new PostRepository($pdo);
+
+$homeController = new HomeController($view, $categoryRepository, $postRepository);
+$categoryController = new CategoryController($view, $categoryRepository, $postRepository);
 
 $router->add('#^/$#', [$homeController, 'index']);
-$router->add('#^/category/(\d+)$#', fn(int $id) => $view->render('placeholder.tpl', ['heading' => "Category #$id"]));
+$router->add('#^/category/(\d+)$#', [$categoryController, 'show']);
 $router->add('#^/post/(\d+)$#', fn(int $id) => $view->render('placeholder.tpl', ['heading' => "Post #$id"]));
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?: '/';

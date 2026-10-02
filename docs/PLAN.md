@@ -7,7 +7,7 @@ Each item is a separate commit. Owner: `(me)` — written by hand, `(AI)` — de
 - [x] 3. (AI) Seeder: `database/seed.php` — recreates the schema, generates ~5 categories and ~40 posts with placeholder images.
 - [x] 4. (me) Core: `Db` (PDO singleton configured from env), `View` (Smarty wrapper), simple `Router` (`/`, `/category/{id}`, `/post/{id}`, 404).
 - [x] 5. (me) Home page: categories that have posts, the 3 latest posts in each, an "All posts" button.
-- [ ] 6. (me) Category page: name, description, post list, sorting (`?sort=views|date`), pagination (`?page=N`).
+- [x] 6. (me) Category page: name, description, post list, sorting (`?sort=views|date`), pagination (`?page=N`).
 - [ ] 7. (me) Post page: full post details, view counter increment, block of 3 related posts (by shared categories).
 - [ ] 8. (AI) Styles: SCSS → CSS (built in docker or via `sass`), basic responsive layout.
 - [ ] 9. (AI) README: how to run, project structure, design decisions.

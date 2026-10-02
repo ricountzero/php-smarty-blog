@@ -25,4 +25,17 @@ final class CategoryRepository
 
         return $stmt->fetchAll();
     }
+
+    /** @return array{id: int, name: string, description: ?string}|null */
+    public function findById(int $id): ?array
+    {
+        $stmt = $this->pdo->prepare(<<<SQL
+            SELECT c.id, c.name, c.description
+            FROM categories c
+            WHERE c.id = :id
+            SQL);
+        $stmt->execute(['id' => $id]);
+
+        return $stmt->fetch() ?: null;
+    }
 }

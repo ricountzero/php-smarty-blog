@@ -39,4 +39,37 @@ final class PostRepository
 
         return $result;
     }
+
+    public function countByCategory(int $categoryId): int
+    {
+        $stmt = $this->pdo->prepare(<<<SQL
+            SELECT COUNT(*)
+            FROM post_category pc
+            WHERE pc.category_id = :category_id
+            SQL);
+        $stmt->execute(['category_id' => $categoryId]);
+
+        return (int) $stmt->fetchColumn();
+    }
+
+    /** @return list<array<string, mixed>> */
+    public function findByCategory(int $categoryId, string $sort, int $limit, int $offset): array
+    {
+        $orderBy = match ($sort) {
+            'views' => 'p.views DESC',
+            'date' => 'p.published_at DESC',
+        };
+
+        $stmt = $this->pdo->prepare(<<<SQL
+            SELECT p.id, p.image, p.title, p.description, p.views, p.published_at
+            FROM post_category pc
+            JOIN posts p ON p.id = pc.post_id
+            WHERE pc.category_id = :category_id
+            ORDER BY $orderBy, p.id DESC
+            LIMIT :limit OFFSET :offset
+            SQL);
+        $stmt->execute(['category_id' => $categoryId, 'limit' => $limit, 'offset' => $offset]);
+
+        return $stmt->fetchAll();
+    }
 }

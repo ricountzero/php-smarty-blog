@@ -25,4 +25,8 @@ RUN usermod -u ${UID} www-data && groupmod -g ${UID} www-data
 
 COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
+# Never show errors to visitors (paths, DSN, stack traces); log them instead.
+# Apache sends the PHP log to stderr, so it is visible in `docker compose logs app`.
+RUN printf 'display_errors=Off\nlog_errors=On\n' > /usr/local/etc/php/conf.d/errors.ini
+
 WORKDIR /var/www/html

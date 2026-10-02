@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use App\Core\View;
-use App\Core\Router;
-use App\Core\NotFoundException;
-use App\Core\Db;
-use App\Controller\HomeController;
 use App\Controller\CategoryController;
+use App\Controller\HomeController;
 use App\Controller\PostController;
+use App\Core\Db;
+use App\Core\NotFoundException;
+use App\Core\Router;
+use App\Core\View;
 use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
 

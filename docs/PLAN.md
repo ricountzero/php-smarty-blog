@@ -11,4 +11,4 @@ Each item is a separate commit. Owner: `(me)` — written by hand, `(AI)` — de
 - [x] 7. (me) Post page: full post details, view counter increment, block of 3 related posts (by shared categories).
 - [x] 8. (AI) Styles: SCSS → CSS (built in docker or via `sass`), basic responsive layout.
 - [x] 9. (AI) README: how to run, project structure, design decisions.
-- [ ] 10. (me + AI review) Final review: `/code-review`, check for SQL injection and XSS, cleanup.
+- [x] 10. (me + AI review) Final review: `/code-review`, check for SQL injection and XSS, cleanup.

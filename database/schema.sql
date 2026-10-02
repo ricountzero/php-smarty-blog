@@ -24,6 +24,7 @@ CREATE TABLE post_category (
     category_id INT UNSIGNED NOT NULL,
     post_id INT UNSIGNED NOT NULL,
     PRIMARY KEY (category_id, post_id),
+    INDEX idx_post_id (post_id),
     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE,
     FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
